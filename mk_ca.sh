@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# copyright (c) 2015 luffae@gmail.com
+# copyright (c) 2018 luffae@gmail.com
 #
 
 wd=$(cd $(dirname $0) && pwd)
@@ -39,22 +39,22 @@ openssl genrsa \
 
 openssl req \
   -new \
-  -nodes \
   -subj "/C=CN/ST=Beijing/L=Beijing/O=Neucloud/OU=Ops/CN=mqtt.neuseer.com" \
   -key \
    $wd/ca/private/ca.key \
   -out \
-   $wd/ca/private/ca.csr
+   $wd/ca/private/ca.csr \
+  -nodes
 
 openssl x509 \
   -req \
-  -days 365 \
   -in \
    $wd/ca/private/ca.csr \
   -signkey \
    $wd/ca/private/ca.key \
   -out \
-   $wd/ca/private/ca.crt
+   $wd/ca/private/ca.crt \
+  -days 365
 
 echo FACE > $wd/ca/misc/serial
 
@@ -64,7 +64,7 @@ openssl ca \
   -gencrl \
   -out \
    $wd/ca/private/ca.crl \
-  -crldays 7 \
   -config \
-   $wd/openssl.conf
+   $wd/openssl.conf \
+  -crldays 7
 

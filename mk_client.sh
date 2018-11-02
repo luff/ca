@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# copyright (c) 2015 luffae@gmail.com
+# copyright (c) 2018 luffae@gmail.com
 #
 
 wd=$(cd $(dirname $0) && pwd)
@@ -16,15 +16,14 @@ openssl genrsa \
 
 openssl req \
   -new \
-  -nodes \
   -key \
    $wd/ca/client/client.key \
   -out \
-   $wd/ca/client/client.csr
+   $wd/ca/client/client.csr \
+  -nodes
 
 openssl ca \
   -cert \
-  -batch \
    $wd/ca/private/ca.crt \
   -keyfile \
    $wd/ca/private/ca.key \
@@ -33,7 +32,8 @@ openssl ca \
   -in \
    $wd/ca/client/client.csr \
   -out \
-   $wd/ca/client/client.crt
+   $wd/ca/client/client.crt \
+  -batch
 
 openssl pkcs12 \
   -export \

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# copyright (c) 2015 luffae@gmail.com
+# copyright (c) 2018 luffae@gmail.com
 #
 
 wd=$(cd $(dirname $0) && pwd)
@@ -13,16 +13,15 @@ openssl genrsa \
 
 openssl req \
   -new \
-  -nodes \
   -subj "/C=CN/ST=Beijing/L=Beijing/O=Neucloud/OU=Ops/CN=mqtt.neuseer.com" \
   -key \
    $wd/ca/server/server.key \
   -out \
-   $wd/ca/server/server.csr
+   $wd/ca/server/server.csr \
+  -nodes
 
 openssl ca \
   -cert \
-  -batch \
    $wd/ca/private/ca.crt \
   -keyfile \
    $wd/ca/private/ca.key \
@@ -31,5 +30,6 @@ openssl ca \
   -in \
    $wd/ca/server/server.csr \
   -out \
-   $wd/ca/server/server.crt
+   $wd/ca/server/server.crt \
+  -batch
 
