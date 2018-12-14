@@ -39,7 +39,7 @@ openssl genrsa \
 
 openssl req \
   -new \
-  -subj "/C=CN/ST=Beijing/L=Beijing/O=Neucloud/OU=Ops/CN=mqtt.neuseer.com" \
+  -subj "/C=CN/ST=Beijing/L=Beijing/O=MyOrg/OU=Ops/CN=a.b.com" \
   -key \
    $wd/ca/private/ca.key \
   -out \
